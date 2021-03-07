@@ -72,6 +72,8 @@ When thinking about this question, we wonder whether the properties cluster in r
 
 The features we believe might determine prices of the properties are the description length, the type of the rooms (whether it is deluxe or not), number of amenities, if the properties have wifi, if the properties have air conditioner, if the properties serve breakfast, service value, occupancy of adults and of children. We want to use these features to explore how all the properties are related to each other in regards of the prices.
 
+#### [Implementation Details](https://github.com/uwhuan/IMT574/blob/master/em_housing.py)
+
 Since we do not have established knowledge on what would be the optimal numbers of the clusters, I first intended to try different clusters number to explore how the AIC and BIC change with the clusters number. Also, I found that when using 90 as the max iteration number, the AIC and BIC results are relatively the smallest. Based on these thoughts and observations, I built up a model looping from 1 to 25 as clusters number, run 25 times with 100 iterations each time, and return the average AIC and BIC values for each cluster numbers. To further explore, I also built up two models using 1 to 15 and 1 to 10 as the cluster numbers.
 
 ### Results
