@@ -7,7 +7,6 @@ Created on Thu Feb 18 03:39:12 2021
 """
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
 from sklearn.mixture import GaussianMixture
 
 data = pd.read_csv('stayzillaCleanFeatures.csv',index_col=0)
@@ -21,18 +20,18 @@ aic_change = []
 bic_change = []
 cluster_num = []
 
-for components_num in range(1, 11):
+for components_num in range(1, 16):
     cluster_num.append(components_num)
     sum_aic = 0;
     sum_bic = 0;
-    for r in range(1, 21):
-        model = GaussianMixture(n_components = components_num, init_params='random', max_iter=100)
+    for r in range(1, 26):
+        model = GaussianMixture(n_components = components_num, init_params='random', max_iter=90)
         model.fit(housing)
         sum_aic += model.aic(housing)
         sum_bic += model.bic(housing)
     
-    average_aic = sum_aic / 20
-    average_bic = sum_bic / 20
+    average_aic = sum_aic / 25
+    average_bic = sum_bic / 25
     aic_change.append(average_aic)
     bic_change.append(average_bic)
     

@@ -58,3 +58,22 @@ Cluster map.  Cluster and price map
 
 The color indicates the different clusterings for each property. We can see that the red and orange clusters dominates most of the places. However, when we add the price feature, we can see that the green cluster has high average prices.
 
+ ## 4. Expectation Maximization
+
+### Use Case
+
+* As a owner of the properties, I want to know whether there are any similarities regarding the prices of the properties. If so, I want to set prices for my properties according to the properties that possess similar features as my properties.
+
+### Solution: Gaussian mixture model
+
+#### Rational
+
+When thinking about this question, we wonder whether the properties cluster in regards of prices, and if so, how would they cluster. We first pick several variables which we believe might be the attributes of the prices; then, we explore the clustering with Expectation Maximization (EM). It is because, in this case, to our knowledge, there is not any clear separation between the clustering. In case like this, the reality of the situation is that there will be uncertainty about the cluster assignments, so it is ideal to use an approach that reflects that. Specifically, we are using a finite Gaussian mixture model (note that the EM algorithm is just the way you estimate the GMM, it isn't the clustering model itself) is one way to respect that fact about this particular situation.
+
+The features we believe might determine prices of the properties are the description length, the type of the rooms (whether it is deluxe or not), number of amenities, if the properties have wifi, if the properties have air conditioner, if the properties serve breakfast, service value, occupancy of adults and of children. We want to use these features to explore how all the properties are related to each other in regards of the prices.
+
+Since we do not have established knowledge on what would be the optimal numbers of the clusters, I first intended to try different clusters number to explore how the AIC and BIC change with the clusters number. Also, I found that when using 90 as the max iteration number, the AIC and BIC results are relatively the smallest. Based on these thoughts and observations, I built up a model looping from 1 to 25 as clusters number, run 25 times with 100 iterations each time, and return the average AIC and BIC values for each cluster numbers. To further explore, I also built up two models using 1 to 15 and 1 to 10 as the cluster numbers.
+
+### Results
+
+AIC and BIC values changing plots with different ranges of clusters numbers. 
