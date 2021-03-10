@@ -58,7 +58,7 @@ Cluster map.  Cluster and price map
 
 The color indicates the different clusterings for each property. We can see that the red and orange clusters dominates most of the places. However, when we add the price feature, we can see that the green cluster has high average prices.
 
- ## 4. Expectation Maximization
+ ## 3. Expectation Maximization
 
 ### Use Case
 
