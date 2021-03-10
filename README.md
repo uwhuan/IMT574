@@ -79,3 +79,21 @@ Since we do not have established knowledge on what would be the optimal numbers 
 ### Results
 
 AIC and BIC values changing plots with different ranges of clusters numbers. 
+
+## 4. Room Price Prediction
+### Use Case
+
+* As a host of properties, I want to determine the optimal room price to rent out my space. The current available pricing resources online or tools from third-party are either limited or charging fees. Refering to the average price of simialr properties is not reliable in the dynamic market. So, a good machine learning model could give me a better accurate price prediction with relativelt low cost. 
+
+* As a data scientist of Stayzilla, I want to compare the performance of different models for price prediction. This will help improve the pricing guideline we procide for host customers. 
+
+### Solution: Linear Regression, Linear Regression using Gradient Descent, Random Forest Regression, Neural Network
+
+#### Rationale
+
+
+#### [Implementation Details]()
+
+
+### Results
+
