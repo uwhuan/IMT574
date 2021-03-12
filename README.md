@@ -10,8 +10,6 @@ This repo contains source code for the final project for IMT 574
 * Clean up `room_price` column to get rid of “per” string
 * Split `Additional Info` column to separate response time and acceptance rate
 
-
-
 ## 1. Service Value Prediction
 
 ### Use Case
@@ -31,6 +29,8 @@ Based on the requirement, we want to use a binary classifier based on the numeri
 We first uses all the numeriacl and boolean features from our cleaned dataset  as independent variables, and use the `service value` column as the predictive variable. Then, we build a knn model with iterative choice of $k$. For each iteration, we calculate the accuracy and f1 score of the model by 20 times and uses the average score. We tried $k$ in range from 0 to 300 and find the best $k$ neighbors.
 
 ### Results
+
+![](./res/knn_res.png)
 
 The following is a plot of the accuracy and f1 scores. We can see that it can achieve high accuracy and f1 score in some k despite of some variation. 
 
@@ -52,9 +52,13 @@ Based on the requirement, we want to use an unsupervised learning model to clust
 
 We first uses all the numeriacl and boolean features from our cleaned dataset  as independent variables. Then we iteratively build a kmeans model using cluster amount from 4 to 15. We want to choose as small clustering as possible to give less confusion for the stakeholders, and keeps the reliability at the same time. We use the inertia value to evaluate our model since it calculates the SSE from each point to the centroid. Finally, we choose 6 as our cluster amounts and plot our results on the map.
 
+<img src="./res/kmeans.png" style="zoom:67%;" />
+
 ### Results
 
-Cluster map.  Cluster and price map
+![](.\res\mapl.png)
+
+[Cluster map](https://github.com/uwhuan/IMT574/blob/master/res/cluster.html).  [Cluster and price map](https://github.com/uwhuan/IMT574/blob/master/res/cluster_clear.html)
 
 The color indicates the different clusterings for each property. We can see that the red and orange clusters dominates most of the places. However, when we add the price feature, we can see that the green cluster has high average prices.
 
@@ -123,7 +127,7 @@ We train the data with the KVM method by applying kernel functions of linear, po
 ### Results
 
 The following table shows the result of the accuracy and f1 scores:
- 
+
 | method      | kernal method |  average accuracy    |f1 score |
 | -           | -             | -                    | -       |
 | svm         | linear        |      63.5%           | 0.305   |
