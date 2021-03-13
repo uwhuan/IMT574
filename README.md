@@ -98,12 +98,12 @@ This is a regression problem in nature. To find a better model for price predict
 
 #### [Data Preparation](https://github.com/uwhuan/IMT574/blob/master/PricePrediction_DataCleaning.ipynb)
 
-_Feature Engineering:_<br>
+_Feature Engineering:_ <br>
 The original dataset has 33 variables, 1207 observations. For most variables, the last 68 observations are missing, which will be excluded here. There is only 1 variable (image_cout) is numeric in default. The rest of variables are categorical and some of them are text data.  We transform some categorical variables into numeric meaning, for example, turning the amenities description to the number of amenities mentioned in the description. Also, we extract some important amennies into boolean values (eg. wifi, ac). Details of feature engineering are provided in the codes with comments. Additionally, for categorical variable with more classes (eg. property type), we encode them to a matrix. For longitude and latitude columns,we group them using K-means clustering and take the output label as the feature in regression models. The target variable is ‘room_price’. The final features (22 features, the last 8 are property types) sare shown in the table. <br>
 
 `'image_count', 'adult_occupancy', 'child_occupancy',  'num_amenities', 'zones', 'descr_len', 'deluxe', 'num_simhotel', 'wifi',  'ac', 'breakfast', 'service_value', 'acceptance_rate', 'response_label', 'Apartment', 'Homestay', 'Hotel', 'House', 'Lodge', 'Resort', 'Spa', 'Villa'` <br>
 
-_Additional data cleaning:_
+_Additional data cleaning:_ <br>
 After determining the features, we further clean the data to impute the missing values with 0 for some variables. We also remove the outliers of room_price. Lastly, we check the correlation between features for any potential multicollinearity. 
 
 #### [Implementation Details](https://github.com/uwhuan/IMT574/blob/master/PricePrediction-Models.ipynb)
