@@ -78,11 +78,33 @@ The features we believe might determine prices of the properties are the descrip
 
 #### [Implementation Details](https://github.com/uwhuan/IMT574/blob/master/em_housing.py)
 
-Since we do not have established knowledge on what would be the optimal numbers of the clusters, I first intended to try different cluster numbers to explore how the AIC and BIC change with the cluster numbers. Also, I found that when using 90 as the max iteration number, the AIC and BIC results are relatively the smallest. Based on these thoughts and observations, I built up a model looping from 1 to 25 as clusters number, run 25 times with 100 iterations each time, and return the average AIC and BIC values for each cluster number. To further explore, I also built up two models using 1 to 15 and 1 to 10 as the cluster numbers.
+Since we do not have established knowledge on what would be the optimal numbers of the clusters, I first intended to try different cluster numbers to explore how the AIC and BIC change with the cluster numbers. Also, I found that when using 90 as the max iteration number, the AIC and BIC results are relatively the smallest. Based on these thoughts and observations, I built up a model looping from 1 to 25 as clusters number, run 25 times with 90 iterations each time, and return the average AIC and BIC values for each cluster number. To further explore, I also built up two models using 1 to 15 and 1 to 10 as the cluster numbers.
 
 ### Results
 
-AIC and BIC values changing plots with different ranges of clusters numbers. 
+Before getting further with the analysis, we would like to point out here that, we do not consider the absolute values, but rather, the values of AIC and BIC. Take AIC as an example. If we consider the calculation of AIC, it is:
+
+<center>AIC = 2k - 2ln(L)</center>
+
+With k being the numbers of parameters and ln(L) the maximized value of the likelihood function of the model. If your likelihood is a continuous probability function, it is not uncommon for the maximum value to be greater than 1. Therefore, when calculating the logarithm of the value, you get a positive number; if that value is greater than k, you get a negative AIC.
+
+Now let us start to look at the plot of cluster number ranging from 0 to 25:
+
+<img src="./res/em-25.png" style="zoom:90%;" />
+
+We can see from the plot that both AIC and BIC become smaller from 1 to 20, stops becoming significantly smaller at around 22, and even starts to rise when getting close to 25. When the cluster number is 25, The AIC value generated from the model is about ﻿-45229.96, and the BIC value is about ﻿-38232.77. 
+
+As was also presented in the plot, the two lines started to become flat at around 15. To further explore, I also built up two models using 1 to 15 and 1 to 10 as the cluster numbers. The plots of the results are as below:
+
+<img src="./res/em-15.png" style="zoom:90%;" />
+
+We can take a closer look here and find that, while both the AIC and BIC are becoming smaller with the cluster number being increased, their slope does present changes. Specifically, both the slopes reduced after cluster number 2, and started to reduce significantly after around 10. As a reference, when the cluster number is 15, The AIC value generated from the model is about ﻿-35425.25, and the BIC value is about ﻿-31228.97. When the cluster number is 10, The AIC value generated from the model is about ﻿-24973.90, and the BIC value is about ﻿﻿-22178.07. 
+
+<img src="./res/em-10.png" style="zoom:90%;" />
+
+Overall, we now know that before around 22, the more clusters we have, the smaller the AIC value and BIC value would become. The two value stops becoming much smaller at around 22. Considered our size, which, after data cleaning, is 1203 rows, 22 or 15 clusters would seem too big of a cluster number. An ideal cluster number that takes the total amount of the data into account is probably 10. This is because that the slopes of AIC and BIC values start to reduce significantly after around 10. I personally would not recommend clusters number to be smaller than 4; as we can see, the slopes before 4 are still pretty sharp. 
+
+Based on the observations above, we can further conclude that on one hand, out data do cluster; on the other hand, we can not be sure whether they cluster regarding the room prices or not, which requires further exploring on the variabels that determine the prices. Prediction of the room prices can also be conducted should the determination question is well addressed. 
 
 ## 4. Room Price Prediction
 ### Use Case
