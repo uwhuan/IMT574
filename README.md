@@ -96,24 +96,27 @@ AIC and BIC values changing plots with different ranges of clusters numbers.
 #### Rationale 
 This is a regression problem in nature. To find a better model for price prediction, we experiment with 4 regression models. We first build a linear regression as the baseline model. Then we choose gradient descent as the optimization approach because it could find the parameters (thetas) with lowest cost. For the third model, we choose random forest regression because our dataset has some invalid or blank values and random forest is good at handling missing data. Lastly, we also build a four-layer neural network, as our variables are not very straightforward in terms of their relationships with the room price. A neural network is a great choice to capture the hidden patterns in data if any. Also, we want to see if there is any difference between the traditional machine learning algorithms and deep learning in this use case. 
 
-#### Data Preparation
+#### Data Preparation [details](https://github.com/uwhuan/IMT574/blob/master/PricePrediction_DataCleaning.ipynb)
+
 _Feature Engineering:_<br>
 The original dataset has 33 variables, 1207 observations. For most variables, the last 68 observations are missing, which will be excluded here. There is only 1 variable (image_cout) is numeric in default. The rest of variables are categorical and some of them are text data.  We transform some categorical variables into numeric meaning, for example, turning the amenities description to the number of amenities mentioned in the description. Also, we extract some important amennies into boolean values (eg. wifi, ac). Details of feature engineering are provided in the codes with comments. Additionally, for categorical variable with more classes (eg. property type), we encode them to a matrix. For longitude and latitude columns,we group them using K-means clustering and take the output label as the feature in regression models. The target variable is ‘room_price’. The final features (22 features, the last 8 are property types) sare shown in the table. <br>
 
 `'image_count', 'adult_occupancy', 'child_occupancy',  'num_amenities', 'zones', 'descr_len', 'deluxe', 'num_simhotel', 'wifi',  'ac', 'breakfast', 'service_value', 'acceptance_rate', 'response_label', 'Apartment', 'Homestay', 'Hotel', 'House', 'Lodge', 'Resort', 'Spa', 'Villa'` <br>
 
-_Data cleaning:_
+_Additional data cleaning:_
 After determining the features, we further clean the data to impute the missing values with 0 for some variables. We also remove the outliers of room_price. Lastly, we check the correlation between features for any potential multicollinearity. 
 
-#### [Implementation Details]()
-We scale them before fitting a model. The metrics used to evaluate a model are test MSE and adjusted r square. For gradient descent, we set the epsilon is 10*-10, and adjust the alpha to decrease the cost. The alpha is set as 0.0001. There are 393 iterations until convergence.  For random Forest, the number of estimators is 100. The neural network has four-layers with the linear activation for the output layer and relu activation functions for all other layers. The hidden layers have 200, 10 nodes and the number of epochs is 20. <br>
+#### [Implementation Details](https://github.com/uwhuan/IMT574/blob/master/PricePrediction-Models.ipynb)
 
-The plot and the table show the results of four models. As we can see, random forest overfits the model. The baseline model is actually doing a better job than other models in test MSE. It is surprising the neural network has low test MSE. This may be because the data size is small and the features all together do not contribute much to the explanation of  the target variable. This can also be seen as the adjusted r square. The highest adjusted r square (from linear regression model) is only 0.21, which means the features can explain around 21% of the variance in room price. <br>
-
-The poor performances of four models indicate that the features, when feeding together, do not substantially affect the price very much. Additionally, the room price in the homestay industry can change quickly due to market dynamics, our data does not capture such patterns because all the data is on the same check-in and check-out date. In the future, we may want to explore more features such as the house star rate and the landmarks to improve prediction outcome. 
-
+We scale them before fitting a model. The metrics used to evaluate a model are test MSE and adjusted r square. For gradient descent, we set the epsilon is 10*-10, and adjust the alpha to decrease the cost. The alpha is set as 0.0001. There are 393 iterations until convergence.  For random Forest, the number of estimators is 100. For neural network, the input layer has 22 nodes and the output layer has 1 node. For hidden layers, considering we are dealing with a relatively small data, we only tried one layer and two layers, and the performance of two layers is better. The final neural network has four-layers with the linear activation for the output layer and relu activation functions for all other layers. The hidden layers have 200, 10 nodes and the number of epochs is 20. <br>
 
 ### Results
+The plot and the table show the results of four models. As we can see, random forest overfits the model. The baseline model is actually doing a better job than other models in test MSE. It is surprising the neural network has low test MSE. This may be because the data size is small and the features all together do not contribute much to the explanation of  the target variable. This can also be seen as the adjusted r square. The highest adjusted r square (from linear regression model) is only 0.21, which means the features can explain around 21% of the variance in room price. <br>
+
+![](.\res\metricsTable.png)
+![](.\res\mse.png)
+
+The poor performances of four models indicate that the features, when feeding together, do not substantially affect the price very much. Additionally, the room price in the homestay industry can change quickly due to market dynamics, our data does not capture such patterns because all the data is on the same check-in and check-out date. In the future, we may want to explore more features such as the house star rate and the landmarks to improve prediction outcome. 
 
 
 ## 5. Classification 
