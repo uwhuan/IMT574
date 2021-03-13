@@ -96,7 +96,7 @@ AIC and BIC values changing plots with different ranges of clusters numbers.
 #### Rationale 
 This is a regression problem in nature. To find a better model for price prediction, we experiment with 4 regression models. We first build a linear regression as the baseline model. Then we choose gradient descent as the optimization approach because it could find the parameters (thetas) with lowest cost. For the third model, we choose random forest regression because our dataset has some invalid or blank values and random forest is good at handling missing data. Lastly, we also build a four-layer neural network, as our variables are not very straightforward in terms of their relationships with the room price. A neural network is a great choice to capture the hidden patterns in data if any. Also, we want to see if there is any difference between the traditional machine learning algorithms and deep learning in this use case. 
 
-#### Data Preparation [details](https://github.com/uwhuan/IMT574/blob/master/PricePrediction_DataCleaning.ipynb)
+#### [Data Preparation](https://github.com/uwhuan/IMT574/blob/master/PricePrediction_DataCleaning.ipynb)
 
 _Feature Engineering:_<br>
 The original dataset has 33 variables, 1207 observations. For most variables, the last 68 observations are missing, which will be excluded here. There is only 1 variable (image_cout) is numeric in default. The rest of variables are categorical and some of them are text data.  We transform some categorical variables into numeric meaning, for example, turning the amenities description to the number of amenities mentioned in the description. Also, we extract some important amennies into boolean values (eg. wifi, ac). Details of feature engineering are provided in the codes with comments. Additionally, for categorical variable with more classes (eg. property type), we encode them to a matrix. For longitude and latitude columns,we group them using K-means clustering and take the output label as the feature in regression models. The target variable is ‘room_price’. The final features (22 features, the last 8 are property types) sare shown in the table. <br>
@@ -113,7 +113,9 @@ We scale them before fitting a model. The metrics used to evaluate a model are t
 ### Results
 The plot and the table show the results of four models. As we can see, random forest overfits the model. The baseline model is actually doing a better job than other models in test MSE. It is surprising the neural network has low test MSE. This may be because the data size is small and the features all together do not contribute much to the explanation of  the target variable. This can also be seen as the adjusted r square. The highest adjusted r square (from linear regression model) is only 0.21, which means the features can explain around 21% of the variance in room price. <br>
 
-![](.\res\metricsTable.png)  ![](.\res\mse.png)
+<img src="./res/metricsTable.png" width="500px" height="auto" />
+
+<img src="./res/mse.png" width="500px" height="auto">
 
 The poor performances of four models indicate that the features, when feeding together, do not substantially affect the price very much. Additionally, the room price in the homestay industry can change quickly due to market dynamics, our data does not capture such patterns because all the data is on the same check-in and check-out date. In the future, we may want to explore more features such as the house star rate and the landmarks to improve prediction outcome. 
 
