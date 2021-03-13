@@ -113,8 +113,7 @@ We scale them before fitting a model. The metrics used to evaluate a model are t
 ### Results
 The plot and the table show the results of four models. As we can see, random forest overfits the model. The baseline model is actually doing a better job than other models in test MSE. It is surprising the neural network has low test MSE. This may be because the data size is small and the features all together do not contribute much to the explanation of  the target variable. This can also be seen as the adjusted r square. The highest adjusted r square (from linear regression model) is only 0.21, which means the features can explain around 21% of the variance in room price. <br>
 
-![](.\res\metricsTable.png)
-![](.\res\mse.png)
+![](.\res\metricsTable.png)  ![](.\res\mse.png)
 
 The poor performances of four models indicate that the features, when feeding together, do not substantially affect the price very much. Additionally, the room price in the homestay industry can change quickly due to market dynamics, our data does not capture such patterns because all the data is on the same check-in and check-out date. In the future, we may want to explore more features such as the house star rate and the landmarks to improve prediction outcome. 
 
