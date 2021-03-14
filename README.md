@@ -148,31 +148,33 @@ The poor performances of four models indicate that the features, when feeding to
 ### Use Case
 
 - As an owner of a property, I want to estimate the expected user feedback. If so, I can refine the description content and improve the provided services to get a higher user rating and increase traffic and order number.
-- As an operational/product analyst of Stayzilla, I want to have predicted feedback toward a newly-registered property so that I can better arrangement of the search result to avoid new property receiving a low exposure rate. 
+- As an operational/product analyst of Stayzilla, I want to have predicted feedback toward a newly-posted property so that I can better arrangement of the search result to avoid new property receiving a low bounce rate. 
 
 ### Solution: Use support vector machine
 
 #### Rational
 
 - Feature selection:
-The response variable is user rating on a scale of 0 to 4. The relevant predictor variables are the descrition of the hightlight value of the property, the distance to landmark, the services & amenities provides by the property, and the number of room types it provides. From the practical life experiences and business logic, all these predictor variables convey information about the service quality.
+The response variable is user rating on a scale of 0 to 4. The relevant predictor variables are the descrition of the hightlight value of the property, the distance to landmark, the services & amenities provides by the property, and the number of room types it provides. From the practical life experiences and business logic, all these predictor variables convey information about the service quality. Because some of the features are text-based, we vectorized and transformed the raw data into the form of a one-hot encoded and bag of words model.
 
 - Method selection:
-The user rating (response variables) is a categorical value, we want to construct a classification model to make the prediction. Because among the predictor variables, we have a mixed type features space with both categorical and continuous numerical value, kernel-based models are optimal for prediction. And because the dataset has an extraordinary high dimension, SVM/NN would generally have a better performance under high dimension data. For this situation, both methods were applied and open for comparing results. But because Neural networks require more hyperparameter to tune and generally consume a longer training time, the selection will favor the result of SVM under the non-linear kernel method instead of neural networks with different network structures.
+The user rating (response variables) is a categorical value, we want to construct a classification model to make the prediction. Because among the predictor variables, we have a mixed type features space with both categorical and continuous numerical value, kernel-based models are optimal for prediction. And because the dataset has an extraordinary high dimension feature space, SVM/NN would generally get results with relatively high accuracy and robustness under high dimension data. For this situation, both methods were applied and open for comparing results. But because Neural networks require more hyperparameter to tune and generally consume a longer training time, the selection will favor the result of SVM under the non-linear kernel method instead of neural networks with different network structures.
 
 #### [Implementation Details](https://github.com/uwhuan/IMT574/blob/master/stars_rate_classifer.py)
 
 Because some of the features are text-based, the major job in the data cleaning phase is to extract numerical and categorical data from text. For example, CountVectorizer was used to apply the bag of words model to vectorize the feature of `highlight_value`. And we also use regex based method to substitute and transform the features such as `landmark`, `service_value`, and `amenities`. The final dimension of training data contains 1109 features, where 20 of them are categorical predictor variables and the rest of them are word vectors.
 
-We train the data with the KVM method by applying kernel functions of linear, polynomial, sigmoid, with a randomized split training & testing dataset, and iterate 50 times to get an average metric result. Then experiment with a naive network structure of 4 layers neural network with RELU activation function on all layers and get a result in 100 epochs.
+We train the data with the KVM method by applying kernel functions of linear, polynomial, sigmoid, with a randomized split training & testing dataset, and iterate 50 times to get an average metric result. Then experiment with a sequential network structure of 4 layers neural network with RELU activation function on all layers and get a result in 100 epochs.
 ### Results
 
-The following table shows the result of the accuracy and f1 scores:
+The following table shows the result of the accuracy and f1 scores with different kernel and activation functions:
 
 
-| method      | kernal method |  average accuracy    |f1 score |
-| -           | -             | -                    | -       |
-| svm         | linear        |      63.5%           | 0.305   |
-| svm         | polynomial    |      68.5%           | 0.260   |
-| svm         | sigmoid       |      69.4%           | 0.251   |
-| nn          | -             |      71.0%           | 0.710   |
+| method      | kernal / activation function |  average accuracy    |f1 score |
+| -           | -                            | -                    | -       |
+| svm         | linear                       |      63.5%           | 0.305   |
+| svm         | polynomial                   |      68.5%           | 0.260   |
+| svm         | sigmoid                      |      69.4%           | 0.251   |
+| nn          | RELU / sigmoid               |      71.0%           | 0.710   |
+
+Generally speaking, the combination of both methods with different kernel/activation functions gives consistent results. Because the text-based features dominate the feature space, it is natural to get a better prediction on the test set using a non-linear kernel function for SVM. From the perspective of the time consumption and computation complexity, the SVM method with the sigmoid kernel function provides the most satisfying result in general. The result can be better improve with further hyperparameter tuning and larger datasets. 
