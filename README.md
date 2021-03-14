@@ -30,7 +30,7 @@ We first uses all the numeriacl and boolean features from our cleaned dataset  a
 
 ### Results
 
-![](./res/knn_res.png)
+<center><img src="./res/knn_res.png"/></center>
 
 The following is a plot of the accuracy and f1 scores. We can see that it can achieve high accuracy and f1 score in some k despite of some variation. 
 
@@ -52,11 +52,12 @@ Based on the requirement, we want to use an unsupervised learning model to clust
 
 We first uses all the numeriacl and boolean features from our cleaned dataset  as independent variables. Then we iteratively build a kmeans model using cluster amount from 4 to 15. We want to choose as small clustering as possible to give less confusion for the stakeholders, and keeps the reliability at the same time. We use the inertia value to evaluate our model since it calculates the SSE from each point to the centroid. Finally, we choose 6 as our cluster amounts and plot our results on the map.
 
-<img src="./res/kmeans.png" style="zoom:67%;" />
+<center><img src="./res/kmeans.png"/></center>
 
 ### Results
 
-![](.\res\mapl.png)
+<center><img src=".\res\mapl.png"/></center>
+
 
 [Cluster map](https://github.com/uwhuan/IMT574/blob/master/res/cluster.html).  [Cluster and price map](https://github.com/uwhuan/IMT574/blob/master/res/cluster_clear.html)
 
@@ -90,17 +91,17 @@ With k being the numbers of parameters and ln(L) the maximized value of the like
 
 Now let us start to look at the plot of cluster number ranging from 0 to 25:
 
-<img src="./res/em-25.png" style="zoom:90%;" />
+<center><img src="./res/em-25.png" style="zoom:90%;" /></center>
 
 We can see from the plot that both AIC and BIC become smaller from 1 to 20, stops becoming significantly smaller at around 22, and even starts to rise when getting close to 25. When the cluster number is 25, The AIC value generated from the model is about ﻿-45229.96, and the BIC value is about ﻿-38232.77. 
 
 As was also presented in the plot, the two lines started to become flat at around 15. To further explore, I also built up two models using 1 to 15 and 1 to 10 as the cluster numbers. The plots of the results are as below:
 
-<img src="./res/em-15.png" style="zoom:90%;" />
+<center><img src="./res/em-15.png" style="zoom:90%;" /></center>
 
 We can take a closer look here and find that, while both the AIC and BIC are becoming smaller with the cluster number being increased, their slope does present changes. Specifically, both the slopes reduced after cluster number 2, and started to reduce significantly after around 10. As a reference, when the cluster number is 15, The AIC value generated from the model is about ﻿-35425.25, and the BIC value is about ﻿-31228.97. When the cluster number is 10, The AIC value generated from the model is about ﻿-24973.90, and the BIC value is about ﻿﻿-22178.07. 
 
-<img src="./res/em-10.png" style="zoom:90%;" />
+<center><img src="./res/em-10.png" style="zoom:90%;" /></center>
 
 Overall, we now know that before around 22, the more clusters we have, the smaller the AIC value and BIC value would become. The two value stops becoming much smaller at around 22. Considered our size, which, after data cleaning, is 1203 rows, 22 or 15 clusters would seem too big of a cluster number. An ideal cluster number that takes the total amount of the data into account is probably 10. This is because that the slopes of AIC and BIC values start to reduce significantly after around 10. I personally would not recommend clusters number to be smaller than 4; as we can see, the slopes before 4 are still pretty sharp. 
 
@@ -135,9 +136,9 @@ We scale them before fitting a model. The metrics used to evaluate a model are t
 ### Results
 The plot and the table show the results of four models. As we can see, random forest overfits the model. The baseline model is actually doing a better job than other models in test MSE. It is surprising the neural network has low test MSE. This may be because the data size is small and the features all together do not contribute much to the explanation of  the target variable. This can also be seen as the adjusted r square. The highest adjusted r square (from linear regression model) is only 0.21, which means the features can explain around 21% of the variance in room price. <br>
 
-<img src="./res/metricsTable.png" width="500px" height="auto" />
+<center><img src="./res/metricsTable.png" width="500px" height="auto" /></center>
 
-<img src="./res/mse.png" width="500px" height="auto">
+<center><img src="./res/mse.png" width="500px" height="auto"></center>
 
 The poor performances of four models indicate that the features, when feeding together, do not substantially affect the price very much. Additionally, the room price in the homestay industry can change quickly due to market dynamics, our data does not capture such patterns because all the data is on the same check-in and check-out date. In the future, we may want to explore more features such as the house star rate and the landmarks to improve prediction outcome. 
 
@@ -167,6 +168,7 @@ We train the data with the KVM method by applying kernel functions of linear, po
 ### Results
 
 The following table shows the result of the accuracy and f1 scores:
+
 
 | method      | kernal method |  average accuracy    |f1 score |
 | -           | -             | -                    | -       |
