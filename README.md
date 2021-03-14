@@ -6,7 +6,15 @@ This repo contains source code for the final project for IMT 574
 
 - StayZilla is an Airbnb like start up from India, it was founded in 2005 and closed in October 2017. Our original data set was part of the bigger dataset(more than 61,000 properties) that was created by extracting data from StayZilla.com.
 
-In our original datasets there are 33 columns with 1207 rows of data. We had done a lot of data preprocessing to clean the data for future usage.
+- In our original datasets there are 33 columns with 1207 rows of data. We had done a lot of data preprocessing to clean the data as shown in section '0. Data Preprocessing' for future usage.
+
+- After cleaning all the data, we decided to make better analysis from the following three perspectives:
+
+1. Customer/Guest
+2. Hosts - owners of the properties on StayZilla
+3. Staff - who used to work at StayZilla
+
+You will see how we did these in the following sections.
 
 ## 0. Data Preprocessing
 
